@@ -1,7 +1,7 @@
 <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="margin-left:0px;">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
-    <a href="/" class="brand-link">
+    <a href="{{route('welcome')}}" class="brand-link">
     <img src="{{ asset('cpadmin/dist/img/AdminLTELogo.png') }}"
         alt="AdminLTE Logo"
         class="brand-image img-circle elevation-3"

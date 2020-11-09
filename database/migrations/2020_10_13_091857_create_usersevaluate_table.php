@@ -22,6 +22,7 @@ class CreateUsersevaluateTable extends Migration
             $table->float('owner')->nullable();
             $table->float('lead')->nullable();
             $table->float('admin')->nullable();
+            $table->longText('review')->nullable();
             $table->timestamps();
         });
     }

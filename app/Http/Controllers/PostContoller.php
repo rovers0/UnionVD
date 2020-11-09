@@ -14,7 +14,7 @@ class PostContoller extends Controller
     {
 
       session(['pst' => 0]);
-      $data = DB::table('activate')->orderBy('stime','DESC')->limit(3)->get();
+      $data = DB::table('activate')->orderBy('stime','DESC')->limit(5)->get();
       return view('welcome',['post'=>$data]);
 
     }

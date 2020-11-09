@@ -38,7 +38,7 @@ $(document).ready(function (){
                 processData: false,
                 type: 'POST',
                 success: function (data) {
-                    alert( data );
+                    alert('successfull')
                 }
             }); 
         
@@ -121,6 +121,7 @@ $(document).ready(function (){
     $("#exampleInputFile").change(function () {
         if(window.confirm('are sure for change your image') == true){
             $("#formchangeimg").submit();
+            alert('Click Blue Button Below to complete' )
             return true;
         }
           return false;

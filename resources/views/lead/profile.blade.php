@@ -10,6 +10,10 @@ img.profile-user-img{
     width: 110px;
     height: 120px;
 }
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: #28A745;
+}
 </style>
 <div class="form-group row">
                             @if (session('status'))
@@ -48,7 +52,10 @@ img.profile-user-img{
                         @endforeach</td></a>
                 </li>
                 <li class="list-group-item">
-                  <b>Toatal score</b> <a class="float-right">{{$user->total_score}}</a>
+                  <b>Toatal event score</b> <a class="float-right">{{$user->total_score}}</a>
+                </li>
+                <li class="list-group-item">
+                  <b>Toatal Reviews score</b> <a class="float-right">{{$escore}}</a>
                 </li>
               </ul>
               <form action="{{route('editimg')}}" method="post" id="formchangimg" enctype="multipart/form-data">
@@ -119,7 +126,7 @@ img.profile-user-img{
           <div class="card">
             <div class="card-header p-2">
               <ul class="nav nav-pills">
-                <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Notification</a></li>
+                <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Reviews</a></li>
                 <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Timeline</a></li>
                 <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
               </ul>
@@ -128,25 +135,60 @@ img.profile-user-img{
               <div class="tab-content">
                 <div class="tab-pane active" id="activity">
                   <!-- Post -->
-                  @foreach($noti as $item)
-                        <div class="card">
-                    <div class="card-header">
-                      <h3 class="card-title text-primary">{{$item->name}}</h3>
+                  @if(isset($noti))
+                    @foreach($noti as $item)
+                          <div class="card">
+                      <div class="card-header">
+                        <h3 class="card-title text-primary">{{$item->name}}</h3>
 
-                      <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                          <i class="fas fa-minus"></i></button>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-                          <i class="fas fa-times"></i></button>
+                        <div class="card-tools">
+                          <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fas fa-minus"></i></button>
+                          <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                            <i class="fas fa-times"></i></button>
+                        </div>
                       </div>
+                      <div class="card-body" style="display: block;">
+                          <div class="row">
+                            <div class="col-md-4 ">
+                              <b>Cá nhân :</b>  
+                            </div>
+                            <div class="col-md-8">
+                              {{ $item->owner }}
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-4">
+                              <b>Bí Thư Lớp :</b> 
+                            </div>
+                            <div class="col-md-8">
+                              {{ $item->lead }}
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-4">
+                              <b>Đoàn Trường :</b> 
+                            </div>
+                            <div class="col-md-8">
+                              {{ $item->admin }}
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-4">
+                              <b>Đánh Giá Chung :</b> 
+                            </div>
+                            <div class="col-md-8">
+                              {{ $item->review }}
+                            </div>
+                          </div>
+                      
+                      </div>
+                      <!-- /.card-body -->
                     </div>
-                    <div class="card-body" style="display: block;">
-                      {!! $item->content !!}
-                    </div>
-                    <!-- /.card-body -->
-                  </div>
-                  @endforeach
-                  
+                    @endforeach
+                    @else
+                      <h3 class="text-primary"> chưa có đánh giá hoàn thành về bạn</h3>
+                  @endif
                   <!-- /.post -->
 
                 </div>
@@ -173,7 +215,7 @@ img.profile-user-img{
                         <h3 class="timeline-header">{{$ev->name}}</h3>
 
                         <div class="timeline-body">
-                          {!! substr( $ev->content,0,300) !!}... 
+                          {!! substr( $ev->content,0,200) !!}... 
                         </div>
                         <div class="timeline-footer">
                           

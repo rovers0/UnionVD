@@ -62,9 +62,23 @@ class HomeController extends Controller
             ->select('activate.*', 'useractive.id','useractive.status')
             ->where('useractive.user_id',Auth::user()->id)
             ->get();
+      $evalu = DB::table('users')
+          ->join('usersevaluate', 'users.id', '=', 'usersevaluate.user_id')
+          ->join('evaluate', 'evaluate.id', '=', 'usersevaluate.evaluate_id')
+          ->where('usersevaluate.user_id',Auth::user()->id)
+          ->where('evaluate.status',1)
+          ->sum('usersevaluate.admin');
+      $none = DB::table('users')
+          ->join('usersevaluate', 'users.id', '=', 'usersevaluate.user_id')
+          ->join('evaluate', 'evaluate.id', '=', 'usersevaluate.evaluate_id')
+          ->select('evaluate.name', 'usersevaluate.owner','usersevaluate.lead','usersevaluate.admin','usersevaluate.review')
+          ->where('usersevaluate.user_id',Auth::user()->id)
+          ->where('evaluate.status',1)
+          ->get();
+          // ->get();
       // $data = DB::table('activate')->orderBy('created_at','DESC')->take(5)->get();
-     // dd($data);
-       return view('lead.profile',['user'=>$user,'noti'=>$noti,'event'=>$data]);
+      //dd($none);
+       return view('lead.profile',['user'=>$user,'noti'=>$none,'event'=>$data,'escore'=>$evalu]);
      }
     public function admin()
     {

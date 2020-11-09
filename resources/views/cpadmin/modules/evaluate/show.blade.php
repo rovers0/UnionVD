@@ -24,6 +24,7 @@
                      <th>user</th>
                      <th>lead</th>
                      <th>admin</th>
+                     <th>Reviews</th>
                      <th>save</th>
                   </tr>
                </thead>
@@ -46,7 +47,9 @@
                         <td> {{$item->owner}}</td>
                         <td> {{$item->lead}}</td>
                         <form  data-url="{{Route('admin.evaluate.valu',['id'=>$item->id])}}">
-                        <td><input type="text" name="admin" id="{{$item->id}}" value="{{$item->admin}}"> </td>
+                        <td><input type="number" name="admin" id="{{$item->id}}" value="{{$item->admin}}"> </td>
+                        <td><textarea  rows="3" placeholder="Reviews ..." name="review">{{$item->review}}</textarea></td>
+                        <!-- <td><input type="text" name="review"  value="{{$item->review}}"> </td> -->
                         <td><button  type="submit" class="btn btn-primary">Save</button></td>
                         </form>
                         
