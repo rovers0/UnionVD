@@ -8,9 +8,10 @@ use Illuminate\Http\Request;
 
 class EvaluateController extends Controller
 {
+    private $evid;
     public function __construct()
     {
-        // $this->middleware('auth');
+        $this->evid= 0;
     }
     /**
      * Display a listing of the resource.
@@ -97,6 +98,23 @@ class EvaluateController extends Controller
         return view('cpadmin.modules.evaluate.edit',['item'=>$cate]);
     }
 
+    public function addget($id)
+    {
+        $this->evid= $id;
+        $cate = DB::table('evaluate')->where('id',$id)->first();
+        $data= DB::table('users')
+                ->WhereNotExists(function ($query)
+                {
+                    $query->select(DB::raw(1))
+                    ->from('usersevaluate')
+                    ->where('evaluate_id',$this->evid)
+                    ->whereRaw('usersevaluate.user_id = users.id');
+                })
+                ->where('role_id','<>',99)
+                ->get();
+           // dd($data);
+        return view('cpadmin.modules.evaluate.add',['item'=>$cate,'listusers'=>$data]);
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -113,7 +131,13 @@ class EvaluateController extends Controller
 
         return redirect()->route('admin.evaluate.index');
     }
-
+    public function addpost(Request $request)
+    {
+        $data =($request->except('_token'));
+        $data['created_at'] = new DateTime();
+        DB::table('usersevaluate')->insert($data); 
+        return redirect()->route('admin.evaluate.index');
+    }
     /**
      * Remove the specified resource from storage.
      *

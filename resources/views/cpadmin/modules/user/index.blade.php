@@ -52,7 +52,7 @@
                         </td>
                         <td>{{$item->phone}}</td>
                         <td> {{date("d/m/Y-h:i:s",strtotime($item->created_at))}}</td>
-                        <td><a href="{{Route('admin.user.edit',['id'=>$item->id])}}">EDIT</a></td>
+                        <td><a href="{{Route('admin.user.edit',['id'=>$item->id])}}">EDIT</a><br><a href="{{Route('admin.user.show',['id'=>$item->id])}}">Information</a></td>
                         <td><a href="{{Route('admin.user.destroy',['id'=>$item->id])}}" onclick="return checkdelete('Are You Sure delete this User ?')">DELETE</a></td>
                     </tr>         
                     @endforeach    

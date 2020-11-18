@@ -42,15 +42,21 @@
                         <td>
                             {{$item->address}} 
                         </td>
+                        @if (isset($item->owner))
+                        <td><input type="text" name="owner" id="{{$item->id}}" value="{{$item->owner}}" disabled > </td>
+                        <td></td>
+                        @else
                         <form  data-url="{{Route('user.valu',['id'=>$item->id])}}">
                         <td><input type="text" name="owner" id="{{$item->id}}" value="{{$item->owner}}"> </td>
                         <td><button  type="submit" class="btn btn-primary">Save</button></td>
                         </form>
+                        @endif
+                        
                         
                     </tr>         
                     @endforeach    
                 @else
-                    <tr><td>contact admin for list<td></tr>
+                    <tr><td>contact admin for if have any error<td></tr>
                 @endif
                </tbody>           
             </table>

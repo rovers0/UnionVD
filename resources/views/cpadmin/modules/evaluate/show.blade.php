@@ -42,11 +42,11 @@
                             @endif
                         @endforeach</td>
                         <td>
-                            {{$item->address}} 
+                            {!!$item->address!!} 
                         </td>
-                        <td> {{$item->owner}}</td>
-                        <td> {{$item->lead}}</td>
                         <form  data-url="{{Route('admin.evaluate.valu',['id'=>$item->id])}}">
+                        <td><input type="number" name="owner"  value="{{$item->owner}}"> </td>
+                        <td><input type="number" name="lead"  value="{{$item->lead}}"> </td>
                         <td><input type="number" name="admin" id="{{$item->id}}" value="{{$item->admin}}"> </td>
                         <td><textarea  rows="3" placeholder="Reviews ..." name="review">{{$item->review}}</textarea></td>
                         <!-- <td><input type="text" name="review"  value="{{$item->review}}"> </td> -->

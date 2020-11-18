@@ -108,7 +108,7 @@ class EvaluateController extends Controller
     public function update(Request $request, $id)
     {
         $data =($request->except('_token'));
-        $data['owner'] = $data['lead'];
+        $data['owner'] = $data['owner'];
         // dd($data);
         // $data = DB::table('users')
         //     ->join('usersevaluate', 'users.id', '=', 'usersevaluate.user_id')

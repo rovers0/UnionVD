@@ -6,6 +6,7 @@ use Datetime;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\User;
 class UserController extends Controller
 {
 
@@ -67,6 +68,10 @@ class UserController extends Controller
          DB::table('users')->insert($data); 
 
          return Redirect::back()->with('status', 'Thêm thành công Mssv'.$data['MSSV']);
+    }
+    public function storeapi(Request $request)
+    {   
+        return User::create($request->all());
     }
 
     /**
@@ -130,5 +135,21 @@ class UserController extends Controller
             DB::table('users')->where('id',$id)->delete();
         });
         return redirect()->route('admin.user.index');
+    }
+    public function showhistory($id)
+    {
+        $user = DB::table('users')->where('id',$id)->first();
+        $data = DB::table('activate')
+              ->join('useractive', 'activate.id', '=', 'useractive.active_id')
+              ->select('activate.*', 'useractive.id','useractive.status')
+              ->where('useractive.user_id',$id)
+              ->get();
+        $evalu = DB::table('users')
+            ->join('usersevaluate', 'users.id', '=', 'usersevaluate.user_id')
+            ->join('evaluate', 'evaluate.id', '=', 'usersevaluate.evaluate_id')
+            ->where('usersevaluate.user_id',$id)
+            ->where('evaluate.status',1)
+            ->sum('usersevaluate.admin');
+         return view('cpadmin.modules.user.show',['user'=>$user,'event'=>$data,'escore'=>$evalu]);
     }
 }

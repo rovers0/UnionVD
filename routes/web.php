@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Route;
         Route::post('update/{id}','UserController@update')->name('update'); 
 
         Route::get('destroy/aa{id}as1.html','UserController@destroy')->name('destroy');
+        Route::get('users-information/150{id}41.html','UserController@showhistory')->name('show');
         Route::post('reset/{id}','UserController@show')->name('reset');
     });
     Route::prefix('class')->name('class.')->group(function () { 
@@ -78,6 +79,9 @@ use Illuminate\Support\Facades\Route;
         Route::post('update/{id}','EvaluateController@update')->name('update'); 
 
         Route::get('destroy/{id}','EvaluateController@destroy')->name('destroy');
+        Route::get('add-user/516{id}.html','EvaluateController@addget')->name('addget');
+        Route::post('update','EvaluateController@addpost')->name('addpost');
+        
     });
 });
 

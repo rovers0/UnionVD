@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\DB;
 use Datetime;
 use File;
 use Illuminate\Http\Request;
+use App\Mail\MailNotify;
+use Illuminate\Support\Facades\Mail;
 
 class EventController extends Controller
 {
@@ -55,9 +57,23 @@ class EventController extends Controller
         $data['name'] = trim($data['name']);
         $data['created_at'] = new DateTime();
         $data['updated_at'] = new DateTime();
-         DB::table('activate')->insert($data); 
+        $usersubrice = DB::table('users')->where('role_id',55)->get(); 
+        $emails = array();
+         foreach($usersubrice as $user){
+            array_push($emails,$user->email);
+         }
+         //dd($data);
+         Mail::send('mail',['data'=>$data['name'],'content'=>$data['content'] ],function ($message) use ($request, $emails)
+         {
+            $message->from('admin@rovers00.xyz', '@SangNgo');
+//            $message->to( $request->input('email') );
+            $message->to( $emails);
+            //Add a subject
+            $message->subject("Đoàn Trường  Thông Báo");
+         });
+       // DB::table('activate')->insert($data); 
 
-         return redirect()->route('admin.event.index');
+        return redirect()->route('admin.event.index');
     }
 
     /**

@@ -43,6 +43,13 @@
         </div>
     </div>
     <div class="form-group row">
+        <label for="totalscore" class="col-md-4 col-form-label text-md-right">{{ __('Total Score') }}</label>
+
+        <div class="col-md-6">
+            <input id="mssv" type="number" class="form-control @error('mssv') is-invalid @enderror" name="total_score" value="{{$item->total_score }}" required autocomplete="name" autofocus>
+        </div>
+    </div>
+    <div class="form-group row">
         <label for="class" class="col-md-4 col-form-label text-md-right">{{ __('class') }}</label>
 
         <div class="col-md-6">

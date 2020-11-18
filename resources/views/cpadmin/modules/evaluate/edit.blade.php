@@ -30,7 +30,7 @@
                 </td></tr>
             <tr><td>CREATED_AT</td><td>{{date("d/m/Y-h:i:s",strtotime($item->created_at))}}</td></tr>
             <tr>
-                 <td></td>
+                 <td><a href="{{Route('admin.evaluate.addget',['id'=>$item->id])}}" class="btn btn-primary ">Add Another menber</a></td>
                  <td><button type="submit"  onclick="return checkdelete('Are You Sure for this changed ?')" class="btn btn-primary ">Confirm Update</button></td>
              </tr>          
         </tbody>
