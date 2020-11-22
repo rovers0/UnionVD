@@ -428,7 +428,7 @@
                                             <h2>{{$data}}</h2>
                                             <p>{!! substr( $content,0,150) !!}</p>
                                             <div class="icon">
-                                                <a href="#">
+                                                <a href="{{route('index')}}">
                                                 <img src="{{asset('/img/002-play-button.png')}}" alt="" style="width: 60px; max-width: 600px; height: auto; margin: auto; display: block;">
                                                 </a>
                                             </div>

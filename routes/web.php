@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -147,4 +148,5 @@ Route::get('/', 'PostContoller@homepage')->name('index');
 Route::get('/post/55{id}215.html', 'PostContoller@show')->name('post');
 Route::get('/about', 'PostContoller@ab')->name('about');
 Route::get('/contact', 'PostContoller@ct')->name('contact');
-Route::post('oldpost', 'PostContoller@oldpost')->name('oldpost');
+Route::post('contact', 'PostContoller@send')->name('contact.send');
+Route::post('oldpost', 'PostContoller@oldpost')->name('homepage.oldpost');

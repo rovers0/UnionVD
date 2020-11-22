@@ -71,7 +71,7 @@ class EventController extends Controller
             //Add a subject
             $message->subject("Đoàn Trường  Thông Báo");
          });
-       // DB::table('activate')->insert($data); 
+        DB::table('activate')->insert($data); 
 
         return redirect()->route('admin.event.index');
     }
